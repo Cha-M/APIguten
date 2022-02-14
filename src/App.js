@@ -9,8 +9,6 @@ const arrayList = (props) => {
     <ul>{listItems}</ul>
   )
 }
-
-
 const App = () => {
 
   const [book, setBook] = useState("");
@@ -23,6 +21,7 @@ const App = () => {
     try {
       // const response = await fetch("https://api.adviceslip.com/advice");
       const randID = Math.floor(Math.random() * 60000);
+      console.log("n", randID);
       const apiStr = "http://gutendex.com/books/" + randID;
       // const response = await fetch("http://gutendex.com/books/84");
       const response = await fetch(apiStr);
@@ -30,12 +29,14 @@ const App = () => {
       console.log(response);
       if (response.status !== 200) {
         console.log("error !200");
+        console.log(response.status);
         throw new Error("Oops");
       }  
       const data = await response.json();
       console.log(data);
 
       setBook(data);
+      console.log("auth", book.authors[0].name);
     } catch (error) {
       setError({error: true, message: error.message})
       console.log("error is", error);
@@ -48,7 +49,7 @@ const App = () => {
 
   useEffect(() => {
     collect()
-  }, []);
+  }, [book]);
 
   //[] means it runs on mounting component
   //[advice] it runs on change of advice
@@ -60,10 +61,11 @@ const App = () => {
   return (
     <div>
       <h1>Title: {book.title}</h1>
-      <div>Subjects: {arrayList(book.subjects)}</div>
+      <h2>{book.authors[0].name}</h2>
+      Subjects: {arrayList(book.subjects)}
       <button onClick={collect}>Fetch</button>
     </div>
   )
 }
 
-export default App
+export default App;
