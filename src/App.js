@@ -3,8 +3,10 @@ import { useState, useEffect } from "react";
 const arrayList = (props) => {
   const items = props;
   const listItems = items.map((item, index) =>
+
     <li>{item}</li>
   )
+
   return (
     <ul>{listItems}</ul>
   )
@@ -56,7 +58,7 @@ const App = () => {
   //[advice] it runs on change of advice
 
   if (error.error) {
-    return <h1>an error is occurred: {error.message}</h1>
+    return <h1>an error has occurred: {error.message}</h1>
   }
 
   // if (book == undefined)
@@ -82,7 +84,7 @@ const App = () => {
           <h2>No author</h2>
         }
         Subjects: {arrayList(book.subjects)}
-        <button onClick={collect}>Random book</button>
+        <button onClick={collect}>Random Book</button>
       </div>
     )
   }
