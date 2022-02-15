@@ -75,7 +75,7 @@ const App = () => {
   else {
     return (
       <div>
-        <h1>Title: {book.title}</h1>
+        <h1>{book.title}</h1>
         {book.authors[0] ?
           <h2>{book.authors[0].name}</h2>
             :
